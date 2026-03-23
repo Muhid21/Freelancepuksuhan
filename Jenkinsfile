@@ -14,20 +14,7 @@ pipeline {
                 checkout scm
             }
         }
-	stage('SonarCloud Analysis') {
-            steps {
-                withCredentials([string(credentialsId: 'freelance', variable: 'SONAR_TOKEN')]) {
-                    sh '''
-                    npx sonarqube-scanner \
-                      -Dsonar.projectKey=suhan21_freelance \
-                      -Dsonar.organization=suhan21 \
-                      -Dsonar.host.url=https://sonarcloud.io \
-                      -Dsonar.token=$SONAR_TOKEN \
-                      -Dsonar.sources=.
-                    '''
-                }
-            }
-        }
+
         stage('Install Dev dependencies') {
             steps {
                 // Instalamos todo aquí para poder correr los tests
